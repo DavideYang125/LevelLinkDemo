@@ -53,6 +53,17 @@ namespace LevelLinDemo.DAL.Repositories
                 return true;
             }
         }
+        public bool UpdateCityName(int id, string name)
+        {
+            using (deyouyun_levellink_devEntities _context = new deyouyun_levellink_devEntities())
+            {
+                var currentCity = _context.citys.FirstOrDefault(l => l.Id == id);
+                if (currentCity is null) return false;
+                currentCity.Name = name;
+                _context.SaveChanges();
+                return true;
+            }
+        }
         public bool UpdateCityName(citys city)
         {
             using (deyouyun_levellink_devEntities _context = new deyouyun_levellink_devEntities())
@@ -64,6 +75,7 @@ namespace LevelLinDemo.DAL.Repositories
                 return true;
             }
         }
+        
         #endregion
 
         #region delete
@@ -72,6 +84,17 @@ namespace LevelLinDemo.DAL.Repositories
             using (deyouyun_levellink_devEntities _context = new deyouyun_levellink_devEntities())
             {
                 var currentCity = _context.citys.FirstOrDefault(l => l.Unique == unique);
+                if (currentCity is null) return false;
+                _context.citys.Remove(currentCity);
+                _context.SaveChanges();
+                return true;
+            }
+        }
+        public bool DeleteCityById(int id)
+        {
+            using (deyouyun_levellink_devEntities _context = new deyouyun_levellink_devEntities())
+            {
+                var currentCity = _context.citys.FirstOrDefault(l => l.Id == id);
                 if (currentCity is null) return false;
                 _context.citys.Remove(currentCity);
                 _context.SaveChanges();

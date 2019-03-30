@@ -64,5 +64,14 @@ namespace LevelLinkDemo.Web.Controllers
             var regions = _regionRespository.GetRegionsByCityId(cityId);
             return Json(regions, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult UpdateProvince(int id, string newProvinceName)
+        {
+            bool isSuccess = _provinceRespository.UpdateProvinceName(id, newProvinceName);
+            if (isSuccess)
+            {
+                return Json(new { Data = "true" });
+            }
+            else return Json(new { Data = "false" });
+        }
     }
 }

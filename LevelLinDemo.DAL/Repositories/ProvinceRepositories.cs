@@ -1,4 +1,5 @@
 ﻿using LevelLinDemo.DAL.Edmx;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,11 +26,22 @@ namespace LevelLinDemo.DAL.Repositories
             }
         }
         #region update
-        public bool UpdateProvinceeName(string unique, string name)
+        public bool UpdateProvinceName(string unique, string name)
         {
             using (deyouyun_levellink_devEntities _context = new deyouyun_levellink_devEntities())
             {
                 var currentProvince = _context.provinces.FirstOrDefault(l => l.Unique == unique);
+                if (currentProvince is null) return false;
+                currentProvince.Name = name;
+                _context.SaveChanges();
+                return true;
+            }
+        }
+        public bool UpdateProvinceName(int id, string name)
+        {
+            using (deyouyun_levellink_devEntities _context = new deyouyun_levellink_devEntities())
+            {
+                var currentProvince = _context.provinces.FirstOrDefault(l => l.Id == id);
                 if (currentProvince is null) return false;
                 currentProvince.Name = name;
                 _context.SaveChanges();

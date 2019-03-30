@@ -34,6 +34,7 @@ namespace LevelLinDemo.DAL.Repositories
                 return regions;
             }
         }
+
         public List<regions> GetRegionsByCityId(int cityId)
         {
             using (deyouyun_levellink_devEntities _context = new deyouyun_levellink_devEntities())
@@ -48,6 +49,17 @@ namespace LevelLinDemo.DAL.Repositories
             using (deyouyun_levellink_devEntities _context = new deyouyun_levellink_devEntities())
             {
                 var currentRegion = _context.regions.FirstOrDefault(l => l.Unique == unique);
+                if (currentRegion is null) return false;
+                currentRegion.Name = name;
+                _context.SaveChanges();
+                return true;
+            }
+        }
+        public bool UpdateRegionName(int id, string name)
+        {
+            using (deyouyun_levellink_devEntities _context = new deyouyun_levellink_devEntities())
+            {
+                var currentRegion = _context.regions.FirstOrDefault(l => l.Id == id);
                 if (currentRegion is null) return false;
                 currentRegion.Name = name;
                 _context.SaveChanges();
