@@ -103,7 +103,9 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Edmx\LinkModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
